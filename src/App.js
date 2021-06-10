@@ -4,6 +4,7 @@ import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css"
 import BotonReset from "./botonReset";
 import Ganador from "./Ganador";
+import Inicio from "./inicio";
 
 
 
@@ -16,11 +17,14 @@ function App(){
             " "," "," "
         ],
         turno : "x",
-        ganador : null
+        ganador : null,
+        jugador1 : "jugador1",
+        jugador2 : "jugador2"
     });
 
     let resetButton = function(){
         setState({
+            ...state,
         tablero : [
             " "," "," ",
             " "," "," ",
@@ -172,11 +176,38 @@ function App(){
         }
     }
 
+    function handleChange(e){
+        setState({
+            ...state,
+            [e.target.name] : e.target.value
+        })
+    }
+
+    function parteX(){
+        setState({
+            ...state,
+            turno : "x"
+        })
+    }
+    function parteO(){
+        setState({
+            ...state,
+            turno : "o"
+        })
+    }
+
     return(
         <>
             <div className="container text-center">
                 <h1>Tik Tak Toe</h1>
-                <Ganador nombre={state.ganador} clase={siHayGanador()} esto={state.ganador}/>
+                <Inicio handleChange={handleChange}
+                player1 = {state.jugador1}
+                player2 = {state.jugador2}
+                btnX ={parteX}
+                btnO ={parteO}
+                />
+                <Ganador nombre={(state.ganador==="x")?state.jugador1:state.jugador2} 
+                clase={siHayGanador()} esto={state.ganador}/>
                 <BotonReset funcion={resetButton}/>
                 {state.tablero.map((value,index)=>{
                     return(
