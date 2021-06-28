@@ -8,7 +8,7 @@ function Tablero(props){
         props.actualizarTablero(props.loc,props.turn);
     }
     return(
-        <div className={"tablero "+props.loc+" "+props.claseExtra}
+        <div className={"tablero "+props.loc+" "+props.claseExtra+" "+props.claseTablero  }
         onClick={()=>tableroClick(props)}>
             <p className="sinMargen">{props.valor}</p>
         </div>   

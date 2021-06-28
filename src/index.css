@@ -1,5 +1,5 @@
 .tablero{
-    border: 8px solid black;
+    /* border: 8px solid black; */
     width: 30%;
     height: 200px;
     font-size: 100px;
@@ -7,6 +7,7 @@
     text-align: center;
     float: left;
     line-height: 150px;
+    
 }
 
 .centrado{
@@ -19,3 +20,15 @@
 .alerta{
     font-size: 100px;
 }
+.t1,.t7{
+   border-left: 1px solid black;
+   border-right: 1px solid black;
+}
+.t3,.t5{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+.t4{
+    border: 1px solid black;
+}
+

@@ -5,21 +5,25 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import BotonReset from "./botonReset";
 import Ganador from "./Ganador";
 import Inicio from "./inicio";
+import { FaHome } from "react-icons/fa"
+import { Link } from "react-router-dom";
 
 
 
 
-function App(){
+function App({match, ...props}){
+    const {nombre1,nombre2} = match.params;
+    console.log(nombre1);
     const [state,setState] = useState({
         tablero : [
             " "," "," ",
             " "," "," ",
             " "," "," "
         ],
-        turno : "x",
+        turno : "",
         ganador : null,
-        jugador1 : "jugador1",
-        jugador2 : "jugador2"
+        jugador1 : nombre1,
+        jugador2 : nombre2
     });
 
     let resetButton = function(){
@@ -30,7 +34,7 @@ function App(){
             " "," "," ",
             " "," "," "
         ],
-        turno : "x",
+        turno : "",
         ganador : null
     });
     }
@@ -176,6 +180,12 @@ function App(){
         }
     }
 
+    function ocultarInicio(){
+        if(state.turno !== ""){
+            return "oculto"
+        }
+    }
+
     function handleChange(e){
         setState({
             ...state,
@@ -195,16 +205,33 @@ function App(){
             turno : "o"
         })
     }
+    function armarTablero(valor){
+        if(valor ===1){
+            return "t1"
+        }else if(valor ===3){
+            return "t3"
+        }else if(valor === 4){
+            return "t4"
+        }else if(valor === 5){
+            return "t5"
+        }else if(valor === 7){
+            return "t7"
+        }
+    }
 
     return(
         <>
             <div className="container text-center">
-                <h1>Tik Tak Toe</h1>
+                <h1>Tik Tak Toe <span>
+                <Link to="/" ><FaHome/></Link>
+                </span></h1>
+                
                 <Inicio handleChange={handleChange}
                 player1 = {state.jugador1}
                 player2 = {state.jugador2}
                 btnX ={parteX}
                 btnO ={parteO}
+                claseExtra={ocultarInicio()}
                 />
                 <Ganador nombre={(state.ganador==="x")?state.jugador1:state.jugador2} 
                 clase={siHayGanador()} esto={state.ganador}/>
@@ -216,6 +243,7 @@ function App(){
                     actualizarTablero={actualizarTablero}
                     turn={state.turno}
                     claseExtra={ocutlarDiv()}
+                    claseTablero={armarTablero(index)}
                     />
                     
                     
